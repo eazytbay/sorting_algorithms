@@ -27,13 +27,24 @@ free(temp);
  */
 void merge_sort_recursive(int *array, int *temp, size_t start, size_t end)
 {
-if (start < end)
-{
-size_t mid = start + (end - start) / 2;
-merge_sort_recursive(array, temp, start, mid);
-merge_sort_recursive(array, temp, mid + 1, end);
-merge(array, start, mid, end);
-}
+    if (start < end)
+    {
+        size_t mid = (start + end) / 2;
+
+        printf("Merging...\n");
+        printf("[left]: ");
+        print_array(array + start, mid - start + 1);
+        printf("[right]: ");
+        print_array(array + mid + 1, end - mid);
+
+        merge_sort_recursive(array, temp, start, mid);
+        merge_sort_recursive(array, temp, mid + 1, end);
+
+        printf("[Done]: ");
+        print_array(array + start, end - start + 1);
+
+        merge(array, start, mid, end);
+    }
 }
 /**
  * merge -A function that Merges two halves of an array into a sorted whole
