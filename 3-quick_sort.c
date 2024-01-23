@@ -1,14 +1,14 @@
 #include "sort.h"
 
 /**
- * array_parted - A function that partitions an array
+ * partition_array - A function that partitions an array
  * @array: The array of integers thats to be partitioned
  * @low: the lowest position of array
  * @high: highest position of the array to be partitioned
  * @size: length of the main array
  * Return: new pivot index
  */
-int array_parted(int *array, int low, int high, size_t size)
+int partition_array(int *array, int low, int high, size_t size)
 {
 	int x = (low - 1);
 	int pvt = array[high];
@@ -40,22 +40,22 @@ int array_parted(int *array, int low, int high, size_t size)
 }
 
 /**
- * fast_sort - A function that sorts an array recursively using quicksort
+ * quicksort - A function that sorts an array recursively using quicksort
  * @array: array of integers
  * @low: the lowest position of array
  * @high: highest position of the array to be partitioned
  * @size: length of the main array
  * Returns: nothing
  */
-void fast_sort(int *array, int low, int high, size_t size)
+void quicksort(int *array, int low, int high, size_t size)
 {
 	int pvt = 0;
 
 	if (low < high)
 	{
 		pvt = partition_array(array, low, high, size);
-		fast_sort(array, low, pvt - 1, size);
-		fast_sort(array, (pvt + 1), high, size);
+		quicksort(array, low, pvt - 1, size);
+		quicksort(array, (pvt + 1), high, size);
 	}
 }
 
@@ -68,5 +68,5 @@ void fast_sort(int *array, int low, int high, size_t size)
 void quick_sort(int *array, size_t size)
 {
 	if (array || size > 1)
-		fast_sort(array, 0, (size - 1), size);
+		quicksort(array, 0, (size - 1), size);
 }
